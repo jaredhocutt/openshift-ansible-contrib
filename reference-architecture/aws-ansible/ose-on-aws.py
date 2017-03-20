@@ -16,6 +16,8 @@ import sys
               show_default=True)
 @click.option('--openshift-sdn', default='openshift-ovs-subnet', type=click.Choice(['openshift-ovs-subnet', 'openshift-ovs-multitenant']),  help='OpenShift SDN',
               show_default=True)
+@click.option('--high-availability', default='yes', help='Create a HA installation',
+              show_default=True)
 
 ### AWS/EC2 options
 @click.option('--region', default='us-east-1', help='ec2 region',
@@ -106,6 +108,7 @@ def launch_refarch_env(region=None,
                     app_dns_prefix=None,
                     deployment_type=None,
                     openshift_sdn=None,
+                    high_availability=None,
                     console_port=443,
                     rhsm_user=None,
                     rhsm_password=None,
@@ -208,6 +211,7 @@ def launch_refarch_env(region=None,
   click.echo('\tconsole port: %s' % console_port)
   click.echo('\tdeployment_type: %s' % deployment_type)
   click.echo('\topenshift_sdn: %s' % openshift_sdn)
+  click.echo('\thigh_availability: %s' % high_availability)
   click.echo('\tpublic_hosted_zone: %s' % public_hosted_zone)
   click.echo('\tapp_dns_prefix: %s' % app_dns_prefix)
   click.echo('\tapps_dns: %s' % wildcard_zone)
@@ -270,6 +274,7 @@ def launch_refarch_env(region=None,
     console_port=%s \
     deployment_type=%s \
     openshift_sdn=%s \
+    high_availability=%s \
     rhsm_user=%s \
     rhsm_password=%s \
     rhsm_pool="%s" \
@@ -303,6 +308,7 @@ def launch_refarch_env(region=None,
                     console_port,
                     deployment_type,
                     openshift_sdn,
+                    high_availability,
                     rhsm_user,
                     rhsm_password,
                     rhsm_pool,
